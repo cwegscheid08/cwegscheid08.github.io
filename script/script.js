@@ -33,5 +33,16 @@ function convertSeconds(seconds) {
 }
 
 function timer() {
-	alert(Date.new);
+	let secondCount = (new Date().getSeconds());
+	let backwardsSecondsCount = ((secondCount - 60) * -1);
+	sec = backwardsSecondsCount;
+	displayTimer();
+	runTimer();
 }
+
+function runTimer() {
+	sec > 1 ? timer() : sec = 0;
+}
+
+timer();
+runTimer();

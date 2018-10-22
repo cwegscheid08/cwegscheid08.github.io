@@ -2,7 +2,7 @@ var container = document.querySelector("container");
 var display = document.querySelector("h1");
 var hr = 0;
 var min = 0;
-var sec = 0;
+var sec = 30;
 
 function displayTimer() {
 	if(hr === 0 || hr === "00") {
@@ -33,16 +33,8 @@ function convertSeconds(seconds) {
 }
 
 function timer() {
-	let secondCount = (new Date().getSeconds());
-	let backwardsSecondsCount = ((secondCount - 60) * -1);
-	sec = backwardsSecondsCount;
-	displayTimer();
-	runTimer();
-}
-
-function runTimer() {
-	sec > 1 ? timer() : sec = 0;
+	setInterval(function() { sec--, displayTimer() }, 1000);
+	clearInterval(0);
 }
 
 timer();
-runTimer();

@@ -4,14 +4,17 @@
 
 
 var container = document.querySelector("container");
-var display = document.querySelector("h1");
+var display = document.querySelector("#timerDisplay");
+var backupDisplay = document.querySelector("#waitingTimer");
+var backupTimerTitle = document.querySelector(".backupTimerTitle");
 // var addTimeButton = document.querySelector(".addTimeButton").onclick = addMinute;
 // var subtractTimeButton = document.querySelector(".subtractTimeButton").onclick = subtractMinute;
 var playButton = document.querySelector(".playButton").onclick = startTimer;
 var pauseButton = document.querySelector(".pauseButton").onclick = pause;
 var resetButton = document.querySelector(".resetButton").onclick = reset;
 var stopButton = document.querySelector(".stopButton").onclick = stopTimer;
-var typeSwitch = document.querySelector("input").onclick = switchTimers;
+var typeSwitch = document.querySelector("input").onclick = function() {switchTimers(), changeString()};
+var switchTitle = document.querySelector(".switchTitle");
 
 var userHour = document.getElementById("hours");
 var userMinute = document.getElementById("minutes");
@@ -41,25 +44,27 @@ function displayTimer() {
 }
 
 function updateDisplay() {
+	
 	for(let key in inputSeconds) {
 		inputHour[key].selected == true ? clock.hr = parseInt(inputHour[key].value) : "";
 		inputMinute[key].selected == true ? clock.min = parseInt(inputMinute[key].value) : "";
 		inputSeconds[key].selected == true ? clock.sec = parseInt(inputSeconds[key].value) : "";
 
 	}
+	isWork == true ? firstWork = Object.assign({}, clock) : firstRest = Object.assign({}, clock);
 	displayTimer();
-	isWork == true ? firstWork = clock.min : firstRest = clock.min;
+	
 	pause();
 }
 
 function setWorkTime() {
-	initWork == true ? (updateDisplay(), initWork = false) : (inputMinute[firstWork/5].selected = true, updateDisplay());
-	firstWork = clock.min;
+	initWork == true ? (updateDisplay(), initWork = false) : (inputHour[firstWork.hr/5].selected = true, inputMinute[firstWork.min/5].selected = true, inputSeconds[firstWork.sec/5].selected = true, updateDisplay());
+	firstWork = Object.assign({}, clock);
 }
 
 function setRestTime() {
-	initRest == true ? (updateDisplay(), initRest = false) : (inputMinute[firstRest/5].selected = true, updateDisplay());
-	firstRest = clock.min;
+	initRest == true ? (updateDisplay(), initRest = false) : (inputHour[firstRest.hr/5].selected = true, inputMinute[firstRest.min/5].selected = true, inputSeconds[firstRest.sec/5].selected = true, updateDisplay());
+	firstRest = Object.assign({}, clock);
 }
 
 function timer() {
@@ -73,7 +78,6 @@ function startTimer() {
 }
 
 function pause() {
-// 	updateDisplay();
 	clearInterval(myTimer);
 }
 
@@ -118,15 +122,27 @@ function isClockLength() {
 	totalSeconds < 0 ? (clearInterval(myTimer), switchTimers(), startTimer()) : "";
 }
 
+function changeString() {
+	switchTitle.textContent == "Set Rest Time" ? (switchTitle.textContent = "Set Work Time", backupTimerTitle.textContent = "Rest Timer") : (switchTitle.textContent = "Set Rest Time", backupTimerTitle.textContent = "Work Timer");
+	isWork == true ? (clock = Object.assign({}, firstRest), backupDisplay.innerHTML = makeClockFormat()) : (clock = Object.assign({}, firstWork), backupDisplay.innerHTML = makeClockFormat());
+	isWork == true ? (clock = Object.assign({}, firstWork)) : (clock = Object.assign({}, firstRest));
+}
+
 function initialize() {
 	isWork = true;
 	initRest = true;
+	inputHour[0].selected = true;
 	inputMinute[1].selected = true;
+	inputSeconds[0].selected = true;
 	setRestTime();
 	
 	initWork = true;
+	inputHour[0].selected = true;
 	inputMinute[5].selected = true;
+	inputSeconds[0].selected = true;
 	setWorkTime();
+
+	changeString();
 }
 
 initialize();

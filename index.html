@@ -6,8 +6,10 @@
     </head>
     <body class="container">
         
-    	<div class="display">
-        	<h1>00:00:00</h1>
+    	<div class="mainDisplay">
+    		<h3 class="backupTimerTitle">Rest Timer</h3>
+        	<h5 id="waitingTimer">00:00:00</h5>
+            <h1 id="timerDisplay">00:00:00</h1>
     	</div>
         
 		<div id="userInput">
@@ -17,8 +19,8 @@
 			<select id="minutes"></select>
 
 			<select id="seconds"></select><br />
-
-			<input type="button" name="typeSwitch">Work or Rest<br /><br />
+			<h6 class="switchTitle">Set Rest Time</h6>
+			<input type="button" name="typeSwitch"><br /><br />
 <!-- 			<button class="addTimeButton">Up</button> -->
 <!-- 			<button class="subtractTimeButton">Down</button> -->
 	        <button class="playButton">Play</button>

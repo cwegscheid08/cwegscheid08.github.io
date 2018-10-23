@@ -19,7 +19,7 @@
 			<select id="minutes"></select>
 
 			<select id="seconds"></select><br />
-			<h6 class="switchTitle">Set Rest Time</h6>
+			<h6 class="switchTitle">Get Rest Timer</h6>
 			<input type="button" name="typeSwitch"><br /><br />
 <!-- 			<button class="addTimeButton">Up</button> -->
 <!-- 			<button class="subtractTimeButton">Down</button> -->
@@ -44,7 +44,7 @@
                 let minutes = document.getElementById("minutes");
                 let seconds = document.getElementById("seconds");
 
-                hours.innerHTML += getOption(num, "hr");
+                hours.innerHTML += getOption(num/5, "hr");
                 minutes.innerHTML += getOption(num, "min");
                 seconds.innerHTML += getOption(num, "sec");
             };

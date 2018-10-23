@@ -9,12 +9,14 @@ var backupDisplay = document.querySelector("#waitingTimer");
 var backupTimerTitle = document.querySelector(".backupTimerTitle");
 // var addTimeButton = document.querySelector(".addTimeButton").onclick = addMinute;
 // var subtractTimeButton = document.querySelector(".subtractTimeButton").onclick = subtractMinute;
-var playButton = document.querySelector(".playButton").onclick = startTimer;
+var playButton = document.querySelector(".playButton").onclick = function() {startTimer(), runOtherTimer()};
 var pauseButton = document.querySelector(".pauseButton").onclick = pause;
 var resetButton = document.querySelector(".resetButton").onclick = reset;
 var stopButton = document.querySelector(".stopButton").onclick = stopTimer;
 var typeSwitch = document.querySelector("input").onclick = function() {switchTimers(), changeString()};
 var switchTitle = document.querySelector(".switchTitle");
+var lastWork;
+var lastRest;
 
 var userHour = document.getElementById("hours");
 var userMinute = document.getElementById("minutes");
@@ -52,30 +54,42 @@ function updateDisplay() {
 
 	}
 	isWork == true ? firstWork = Object.assign({}, clock) : firstRest = Object.assign({}, clock);
+	lastWork = Object.assign({}, firstWork);
+	lastRest = Object.assign({}, firstRest);
 	displayTimer();
-	
-	pause();
 }
 
 function setWorkTime() {
-	initWork == true ? (updateDisplay(), initWork = false) : (inputHour[firstWork.hr/5].selected = true, inputMinute[firstWork.min/5].selected = true, inputSeconds[firstWork.sec/5].selected = true, updateDisplay());
+	initWork == true ? (updateDisplay(), initWork = false) : (inputHour[firstWork.hr].selected = true, inputMinute[firstWork.min/5].selected = true, inputSeconds[firstWork.sec/5].selected = true, updateDisplay());
 	firstWork = Object.assign({}, clock);
 }
 
 function setRestTime() {
-	initRest == true ? (updateDisplay(), initRest = false) : (inputHour[firstRest.hr/5].selected = true, inputMinute[firstRest.min/5].selected = true, inputSeconds[firstRest.sec/5].selected = true, updateDisplay());
+	initRest == true ? (updateDisplay(), initRest = false) : (inputHour[firstRest.hr].selected = true, inputMinute[firstRest.min/5].selected = true, inputSeconds[firstRest.sec/5].selected = true, updateDisplay());
 	firstRest = Object.assign({}, clock);
 }
 
 function timer() {
-	clock.sec--;
+	lastWork.sec--;
+	lastRest.sec--;
+	runOtherTimer();
 	displayTimer();
+
 }
+
+// function otherTimer() {
+// 	clock.sec--;
+// 	backupDisplay.textContent = makeClockFormat();	
+// }
 
 function startTimer() {
 	updateDisplay();
 	myTimer = setInterval(function() {isClockLength(), timer()}, 1000);
 }
+
+// function backupTimer() {
+// 	myBackupTimer = setInterval(function() {isClockLength(), otherTimer()}, 1000);
+// }
 
 function pause() {
 	clearInterval(myTimer);
@@ -123,9 +137,14 @@ function isClockLength() {
 }
 
 function changeString() {
-	switchTitle.textContent == "Set Rest Time" ? (switchTitle.textContent = "Set Work Time", backupTimerTitle.textContent = "Rest Timer") : (switchTitle.textContent = "Set Rest Time", backupTimerTitle.textContent = "Work Timer");
-	isWork == true ? (clock = Object.assign({}, firstRest), backupDisplay.innerHTML = makeClockFormat()) : (clock = Object.assign({}, firstWork), backupDisplay.innerHTML = makeClockFormat());
-	isWork == true ? (clock = Object.assign({}, firstWork)) : (clock = Object.assign({}, firstRest));
+	switchTitle.textContent == "Get Rest Timer" ? (switchTitle.textContent = "Get Work Timer", backupTimerTitle.textContent = "Work Timer") : (switchTitle.textContent = "Get Rest Timer", backupTimerTitle.textContent = "Rest Timer");
+	runOtherTimer();
+}
+
+function runOtherTimer() {
+	
+	isWork == true ? (clock = Object.assign({}, lastRest), lastRest.sec -= 1, backupDisplay.innerHTML = makeClockFormat()) : (clock = Object.assign({}, lastWork), lastWork.sec -= 1, backupDisplay.innerHTML = makeClockFormat());	
+	isWork == true ? (clock = Object.assign({}, lastWork)) : (clock = Object.assign({}, lastRest));
 }
 
 function initialize() {
@@ -142,7 +161,7 @@ function initialize() {
 	inputSeconds[0].selected = true;
 	setWorkTime();
 
-	changeString();
+	runOtherTimer();
 }
 
 initialize();

@@ -2,3 +2,7 @@ html {
 	font-family: sans-serif;
 	font-weight: 100;
 }
+
+.userInput {
+	display: inline;
+}

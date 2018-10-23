@@ -5,52 +5,81 @@
 
 var container = document.querySelector("container");
 var display = document.querySelector("h1");
-var addTimeButton = document.querySelector(".addTimeButton").onclick = addMinute;
-var subtractTimeButton = document.querySelector(".subtractTimeButton").onclick = subtractMinute;
+// var addTimeButton = document.querySelector(".addTimeButton").onclick = addMinute;
+// var subtractTimeButton = document.querySelector(".subtractTimeButton").onclick = subtractMinute;
 var playButton = document.querySelector(".playButton").onclick = startTimer;
 var pauseButton = document.querySelector(".pauseButton").onclick = pause;
 var resetButton = document.querySelector(".resetButton").onclick = reset;
 var stopButton = document.querySelector(".stopButton").onclick = stopTimer;
+var typeSwitch = document.querySelector("input").onclick = switchTimers;
+
+var userHour = document.getElementById("hours");
+var userMinute = document.getElementById("minutes");
+var userSeconds = document.getElementById("seconds");
+var inputHour = userHour.querySelectorAll("option");
+var inputMinute = userMinute.querySelectorAll("option");
+var inputSeconds = userSeconds.querySelectorAll("option");
+var isWork;
+userHour.addEventListener("input", updateDisplay);
+userMinute.addEventListener("input", updateDisplay);
+userSeconds.addEventListener("input", updateDisplay);
+
+
 var myTimer;
 
 
-var clock = {
-	hr:0,
-	min:25,
-	sec:0,
-};
+
+var clock = {hr:0, min:0, sec:0};
+var firstWork;
+var firstRest;
+var initWork;
+var initRest;
 
 function displayTimer() {
 	let time = makeClockFormat();
 	display.innerHTML = time;
 }
 
-function setWorkTime() {
+function updateDisplay() {
+	for(let key in inputSeconds) {
+		inputHour[key].selected == true ? clock.hr = parseInt(inputHour[key].value) : "";
+		inputMinute[key].selected == true ? clock.min = parseInt(inputMinute[key].value) : "";
+		inputSeconds[key].selected == true ? clock.sec = parseInt(inputSeconds[key].value) : "";
+
+	}
 	displayTimer();
+	isWork == true ? firstWork = clock.min : firstRest = clock.min;
+	pause();
+}
+
+function setWorkTime() {
+	initWork == true ? (updateDisplay(), initWork = false) : (inputMinute[firstWork/5].selected = true, updateDisplay());
+	firstWork = clock.min;
 }
 
 function setRestTime() {
-	displayTimer();
+	initRest == true ? (updateDisplay(), initRest = false) : (inputMinute[firstRest/5].selected = true, updateDisplay());
+	firstRest = clock.min;
 }
 
 function timer() {
-	displayTimer();
 	clock.sec--;
+	displayTimer();
 }
 
 function startTimer() {
+	updateDisplay();
 	myTimer = setInterval(function() {isClockLength(), timer()}, 1000);
 }
 
 function pause() {
+// 	updateDisplay();
 	clearInterval(myTimer);
 }
 
 function reset() {
 	pause();
-	clock.hr = 0;
-	clock.min = 25;
-	clock.sec = 0;
+	updateDisplay();
 	displayTimer();
 }
 
@@ -61,23 +90,17 @@ function stopTimer() {
 	displayTimer();
 }
 
-function addMinute() {clock.min++, setWorkTime()};
-
-function subtractMinute() {clock.min--, setWorkTime()};
-
-
 function makeClockFormat() {
 	let seconds = getTotalSeconds();
 	clock.hr = Math.floor(seconds/3600);
 	clock.min = Math.floor((seconds - (clock.hr * 3600))/60);
 	clock.sec = seconds - ((clock.hr * 3600) + (clock.min * 60));
-	console.log(clock);
 	let time = [];
-	 for(var key in clock) {
-	 	clock[key] < 10 ? time.push("0" + clock[key]) : time.push(clock[key]);
-	 };
-	 time[0] === "00" ? time.shift() : "";
-	 return time.join(":");
+	for(var key in clock) {
+		clock[key] < 10 ? time.push("0" + clock[key]) : time.push(clock[key]);
+	};
+	time[0] === "00" ? time.shift() : "";
+	return time.join(":");
 }
 
 function getTotalSeconds() {
@@ -85,9 +108,25 @@ function getTotalSeconds() {
 	return seconds;
 }
 
-function isClockLength() {
-	totalSeconds = getTotalSeconds();
-	totalSeconds <= 0 ? clearInterval(myTimer) : "";
+function switchTimers() {
+	isWork == true ? isWork = false : isWork = true;
+	isWork == true ? setWorkTime() : setRestTime();
 }
 
-displayTimer();
+function isClockLength() {
+	totalSeconds = getTotalSeconds();
+	totalSeconds < 0 ? (clearInterval(myTimer), switchTimers(), startTimer()) : "";
+}
+
+function initialize() {
+	isWork = true;
+	initRest = true;
+	inputMinute[1].selected = true;
+	setRestTime();
+	
+	initWork = true;
+	inputMinute[5].selected = true;
+	setWorkTime();
+}
+
+initialize();

@@ -10,12 +10,17 @@
         	<h1>00:00:00</h1>
     	</div>
         
-		<div class="userInput">
-			<select>
-				<option value="1">1</option>
-			</select>
-			<button class="addTimeButton">Up</button>
-			<button class="subtractTimeButton">Down</button>
+		<div id="userInput">
+			
+			<select id="hours"></select>
+			
+			<select id="minutes"></select>
+
+			<select id="seconds"></select><br />
+
+			<input type="button" name="typeSwitch">Work or Rest<br /><br />
+<!-- 			<button class="addTimeButton">Up</button> -->
+<!-- 			<button class="subtractTimeButton">Down</button> -->
 	        <button class="playButton">Play</button>
 	        <button class="pauseButton">Pause</button>
 	        <button class="resetButton">Reset</button>
@@ -26,6 +31,26 @@
         	<p>The Pomodoro Technique is a time management method developed by Francesco Cirillo in the late 1980s. The technique uses a timer to break down work into intervals, traditionally 25 minutes in length, separated by short breaks. These intervals are named pomodoros, the plural in English of the Italian word pomodoro (tomato), after the tomato-shaped kitchen timer that Cirillo used as a university student.</p>
         </div>
 
+
+        <script type="text/javascript">
+            function getOption(num, hand) {
+            	return (`<option value="${num}" class=${hand}>${num}</option>`);
+            }
+
+            function buildOptions(num) {
+                let hours = document.getElementById("hours");
+                let minutes = document.getElementById("minutes");
+                let seconds = document.getElementById("seconds");
+
+                hours.innerHTML += getOption(num, "hr");
+                minutes.innerHTML += getOption(num, "min");
+                seconds.innerHTML += getOption(num, "sec");
+            };
+
+            for(i = 0; i <= 60; i++) {
+		  		Math.floor(i/5) == i/5 ? buildOptions(i) : "";
+            };
+        </script>
 
         <script type="text/javascript" src="script/script.js"></script>
 

@@ -70,26 +70,16 @@ function setRestTime() {
 }
 
 function timer() {
-	lastWork.sec--;
-	lastRest.sec--;
+	isWork == false ? lastRest.sec-- : lastWork.sec--;
 	runOtherTimer();
 	displayTimer();
 
 }
 
-// function otherTimer() {
-// 	clock.sec--;
-// 	backupDisplay.textContent = makeClockFormat();	
-// }
-
 function startTimer() {
 	updateDisplay();
 	myTimer = setInterval(function() {isClockLength(), timer()}, 1000);
 }
-
-// function backupTimer() {
-// 	myBackupTimer = setInterval(function() {isClockLength(), otherTimer()}, 1000);
-// }
 
 function pause() {
 	clearInterval(myTimer);
@@ -143,7 +133,7 @@ function changeString() {
 
 function runOtherTimer() {
 	
-	isWork == true ? (clock = Object.assign({}, lastRest), lastRest.sec -= 1, backupDisplay.innerHTML = makeClockFormat()) : (clock = Object.assign({}, lastWork), lastWork.sec -= 1, backupDisplay.innerHTML = makeClockFormat());	
+	isWork == true ? (clock = Object.assign({}, lastRest), lastRest.sec -= 1, backupDisplay.innerHTML = makeClockFormat()) : "";//(clock = Object.assign({}, lastWork), lastWork.sec -= 1, backupDisplay.innerHTML = makeClockFormat());	
 	isWork == true ? (clock = Object.assign({}, lastWork)) : (clock = Object.assign({}, lastRest));
 }
 

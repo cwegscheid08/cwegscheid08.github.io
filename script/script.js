@@ -13,7 +13,8 @@ var resetButton = document.querySelector(".resetButton").onclick = reset;
 var stopButton = document.querySelector(".stopButton").onclick = stopTimer;
 var typeSwitch = document.querySelector("input").onclick = function() {switchTimers(), changeString()};
 var switchTitle = document.querySelector(".switchTitle");
-var isRunning;
+var workRunning;
+var isRunning = false;
 var lastWork;
 var lastRest;
 
@@ -30,7 +31,7 @@ userSeconds.addEventListener("input", updateDisplay);
 
 
 var myTimer;
-
+var myOtherTimer;
 
 
 var clock = {hr:0, min:0, sec:0};
@@ -44,7 +45,6 @@ function displayTimer() {
 	backupDisplay.innerHTML = makeClockFormat();
 	isWork == true ? clock = Object.assign({}, lastWork) : clock = Object.assign({}, lastRest);
 	display.innerHTML = makeClockFormat();
-// 	backupDisplay.innerHTML = "5:00";
 }
 
 function updateDisplay() {
@@ -56,35 +56,44 @@ function updateDisplay() {
 
 	}
 	display.innerHTML = makeClockFormat();
+	isWork == true ? lastWork = Object.assign({}, clock) : lastRest = Object.assign({}, clock);
 }
 
 function setWorkTime() {
 	initWork == true ? (firstWork = Object.assign({}, clock), (lastWork = Object.assign({}, firstWork))): ""; 
-	initWork == true ? (initWork = false) : (inputHour[lastWork.hr].selected = true, inputMinute[lastWork.min/5].selected = true, inputSeconds[lastWork.sec/5].selected = true, updateDisplay());
-	lastWork = Object.assign({}, clock);
+	initWork == true ? (initWork = false) : (inputHour[lastWork.hr].selected = true, inputMinute[lastWork.min/5].selected = true, inputSeconds[lastWork.sec/5].selected = true);
+	updateDisplay();
 }
 
 function setRestTime() {
 	initRest == true ? (firstRest = Object.assign({}, clock), (lastRest = Object.assign({}, firstRest))) : "";
-	initRest == true ? (initRest = false) : (inputHour[lastRest.hr].selected = true, inputMinute[lastRest.min/5].selected = true, inputSeconds[lastRest.sec/5].selected = true, updateDisplay());
-// 	firstRest = Object.assign({}, clock);
-	lastRest = Object.assign({}, clock);
+	initRest == true ? (initRest = false) :  (inputHour[lastRest.hr].selected = true, inputMinute[lastRest.min/5].selected = true, inputSeconds[lastRest.sec/5].selected = true);
+	updateDisplay();
+}
+
+function switchWorkTime () {
+	updateDisplay();
+}
+
+function switchRestTime() {
+	updateDisplay();
 }
 
 function timer() {
 // 	isWork == true ? setWorkTime() : setRestTime();
-	isWork == true ? (lastWork.sec--, displayTimer()) : (lastWork.sec--, runOtherTimer());
-	isWork == true ? setWorkTime() : setRestTime();
+	isWork == true ? (lastWork.sec--, displayTimer()) : (lastWork.sec--, displayTimer());
+// 	isWork == true ? setWorkTime() : setRestTime();
 // 	displayTimer();
 // 	runOtherTimer();
 }
 
 function startTimer() {
 // 	isWork = true;
-// 	updateDisplay();
 	isRunning = true;
-	setWorkTime();
-	myTimer = setInterval(function() {isClockLength(), timer()}, 1000);
+// 	updateDisplay();
+	
+	// workRunning == true ? setWorkTime() : setRestTime();
+	myTimer = setInterval(function() {timer(), isClockLength()}, 1000);
 }
 
 function pause() {
@@ -104,7 +113,9 @@ function stopTimer() {
 	clock.sec = 0;
 	clock.min = 0;
 	clock.hr = 0;
-	displayTimer();
+	pause();
+	// displayTimer();
+	display.innerHTML = makeClockFormat();
 }
 
 function makeClockFormat() {
@@ -133,8 +144,14 @@ function switchTimers() {
 }
 
 function isClockLength() {
+	workRunning == true ? clock = Object.assign({}, lastWork) : clock = Object.assign({}, lastRest);
 	totalSeconds = getTotalSeconds();
-	totalSeconds < 0 ? (clearInterval(myTimer), switchTimers(), startTimer()) : "";
+	if(workRunning == true) {
+		totalSeconds <= 0 ? (clearInterval(myTimer), switchTimers(), workRunning = false, lastWork = Object.assign({}, firstWork), otherTimer()) : "";
+	} else if (workRunning == false) {
+		totalSeconds <= 0 ? (clearInterval(myOtherTimer), switchTimers(), workRunning = true, lastRest = Object.assign({}, firstRest), startTimer()) : "";
+	}
+	// totalSeconds <= 0 ? (clearInterval(workRunning = true ? myTimer : myOtherTimer), switchTimers(), workRunning == true ? workRunning = false : workRunning = true, lastRest = Object.assign({}, firstRest) , lastWork = Object.assign({}, firstWork), workRunning == true ? otherTimer() : startTimer()) : "";
 }
 
 function changeString() {
@@ -151,6 +168,7 @@ function initialize() {
 	isWork = true;
 	initWork = true;
 	initRest = true;
+	workRunning = true;
 	inputHour[0].selected = true;
 	inputMinute[1].selected = true;
 	inputSeconds[0].selected = true;
@@ -166,6 +184,14 @@ function initialize() {
 
 
 	runOtherTimer();
+}
+
+function otherTimer() {
+	myOtherTimer = setInterval(function() {backupTimer(), isClockLength()}, 1000);
+}
+
+function backupTimer() {
+	workRunning == false ? (lastRest.sec--, displayTimer()) : (lastRest.sec--, displayTimer());
 }
 
 initialize();

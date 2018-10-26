@@ -3,8 +3,9 @@
 // THIS CAN ALSO CAUSE IT TO PASS OVER THE ZERO STOP CATCH.
 
 
-var container = document.querySelector("container");
+var container = document.querySelector("#container");
 var display = document.querySelector("#timerDisplay");
+
 var backupDisplay = document.querySelector("#waitingTimer");
 var backupTimerTitle = document.querySelector(".backupTimerTitle");
 var playButton = document.querySelector(".playButton").onclick = startTimer;

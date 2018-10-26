@@ -55,6 +55,9 @@ function updateDisplay() {
 		inputSeconds[key].selected == true ? clock.sec = parseInt(inputSeconds[key].value) : "";
 
 	}
+	// if (isRunning == false) {
+	isWork == true ? firstWork = Object.assign({}, clock) : firstRest = Object.assign({}, clock);
+	// }
 	display.innerHTML = makeClockFormat();
 	isWork == true ? lastWork = Object.assign({}, clock) : lastRest = Object.assign({}, clock);
 }
@@ -98,6 +101,7 @@ function startTimer() {
 
 function pause() {
 	clearInterval(myTimer);
+	clearInterval(myOtherTimer);
 	isRunning = false;
 }
 
@@ -147,9 +151,9 @@ function isClockLength() {
 	workRunning == true ? clock = Object.assign({}, lastWork) : clock = Object.assign({}, lastRest);
 	totalSeconds = getTotalSeconds();
 	if(workRunning == true) {
-		totalSeconds <= 0 ? (clearInterval(myTimer), switchTimers(), workRunning = false, lastWork = Object.assign({}, firstWork), otherTimer()) : "";
+		totalSeconds <= 0 ? (clearInterval(myTimer), workRunning = false, lastWork = Object.assign({}, firstWork), clock = Object.assign({}, firstRest), otherTimer(), changeString(), switchTimers()) : "";
 	} else if (workRunning == false) {
-		totalSeconds <= 0 ? (clearInterval(myOtherTimer), switchTimers(), workRunning = true, lastRest = Object.assign({}, firstRest), startTimer()) : "";
+		totalSeconds <= 0 ? (clearInterval(myOtherTimer), workRunning = true, lastRest = Object.assign({}, firstRest), clock = Object.assign({}, firstWork), startTimer(), changeString(), switchTimers()) : "";
 	}
 	// totalSeconds <= 0 ? (clearInterval(workRunning = true ? myTimer : myOtherTimer), switchTimers(), workRunning == true ? workRunning = false : workRunning = true, lastRest = Object.assign({}, firstRest) , lastWork = Object.assign({}, firstWork), workRunning == true ? otherTimer() : startTimer()) : "";
 }
@@ -195,3 +199,7 @@ function backupTimer() {
 }
 
 initialize();
+
+
+
+//BACKUP TIMER AMOUNT IS TRANSFERING OVER TO THE FIRST WORK OR REST AMOUNT WHEN RUNNING TIMER IS IN BACKGROUND

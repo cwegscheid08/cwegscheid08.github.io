@@ -65,7 +65,7 @@ function updateDisplay() {
 
 function setWorkTime() {
 	initWork == true ? (firstWork = Object.assign({}, clock), (lastWork = Object.assign({}, firstWork))): ""; 
-	initWork == true ? (initWork = false) : (inputHour[lastWork.hr].selected = true, inputMinute[lastWork.min/5].selected = true, inputSeconds[lastWork.sec/5].selected = true);
+	initWork == true ? (initWork = false) : (inputHour[lastWork.hr].selected = true, inputMinute[lastWork.min/5].selected = true, inputSeconds[(lastWork.sec/5)*-1].selected = true);
 	updateDisplay();
 }
 

@@ -12,18 +12,20 @@
     	</div>
 
         <div class="backupDisplay">
-            <h3 class="backupTimerTitle">Rest Timer</h3>
-            <h5 id="waitingTimer">00:00:00</h5>
+            <h5 class="backupTimerTitle">Rest Timer:</h5>
+            <h3 id="waitingTimer">00:00:00</h3>
         </div>
         
 		<div id="userInput">
-			<h3>Set Your Timer</h3>
-			<span>Hrs: </span>
-			<select id="hours"></select>
-			<span>Mins: </span>
-			<select id="minutes"></select>
-            <span>Secs: </span>
-			<select id="seconds"></select><br />
+			<h3 class="selectionTitle">Set Your Timer</h3>
+            <div class="selection">
+    			<span>Hrs: </span>
+    			<select id="hours"></select>
+    			<span>Mins: </span>
+    			<select id="minutes"></select>
+                <span>Secs: </span>
+    			<select id="seconds"></select><br />
+            </div>
 <!-- 			<h6 class="switchTitle">Get Rest Timer</h6>
 			<input type="button" name="typeSwitch"><br /><br />
 	        <button class="playButton">Play</button>
@@ -35,10 +37,10 @@
         <div class="buttons">
 <!-- 			<h6 class="switchTitle">Get Rest Timer</h6>
 			<input type="button" name="typeSwitch"><br /><br /> -->
-	        <button class="playButton">Play</button><br />
-	        <button class="pauseButton">Pause</button><br />
-	        <button class="resetButton">Reset</button><br />
-	        <button class="stopButton">Stop</button><br />
+	        <button class="playButton"><img class="icon" src="./images/play.png"></button><br />
+	        <button class="pauseButton"><img src="./images/pause-512.png" class="icon"></button><br />
+	        <button class="resetButton"><img src="./images/reset-512.png" class="icon"></button><br />
+	        <button class="stopButton"><img src="./images/stop_song_red-512.png" class="icon"></button><br />
         </div>
 		
 		<div class="switch">

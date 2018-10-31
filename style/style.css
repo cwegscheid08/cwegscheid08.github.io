@@ -2,46 +2,48 @@ html {
 	margin: 0;
 	padding: 0;
 	display: inline-block;
+	height: 100%;
+	width: 100%;
 }
 
 .container {
 	width: auto;
-	heigth: 100%;
+	height: 100%;
 	font-family: 'Share Tech Mono', monospace;
 	font-weight: 100;
 	display: grid;
 	grid-template-areas: 
-		"otherTimer nothing instructions"
+		"controls controls controls"
 		"buttons mainTimer switch"
-		"controls controls controls";
-	grid-auto-columns: 1fr 1fr 1fr;
-	grid-auto-rows: 1fr 1fr 1fr;
-
+		"no otherTimer thing";
+	grid-auto-columns: 100px 1fr 200px;
+	grid-auto-rows: 94px 1fr 40px;
 }
 
 #userInput {
 	grid-area: controls;
 	display: inline;
 	justify-self: center;
-	align-self: start;
-	background-color: lightgray;
+	align-self: end;
+	text-align: center;
+	text-shadow: 6px 4px 20px #5a5a5a;
 }
 
 .mainDisplay {
 	color: red;
-	/*text-shadow: 1px 1px 1px 1px black;*/
-	font-size: 50px;
+	font-size: 11px;
 	grid-area: mainTimer;
 	align-self: center;
-	justify-self: start;
-	/* background-color: lightgray; */
+	justify-self: center;
+	text-shadow: 6px 4px 20px #5a5a5a;
 }
 
 .backupDisplay {
 	grid-area: otherTimer;
-	background-color: lightgray;
-	align-self: center;
-	justify-self: center;
+	align-self: end;
+	justify-self: start;
+	display: inline-flex;
+	text-shadow: 6px 4px 20px #5a5a5a;
 }
 
 .text {
@@ -53,21 +55,73 @@ html {
 
 .buttons {
 	grid-area: buttons;
-	align-self: center;
+	display: grid;
+	grid-template-areas: 
+		"play"
+		"pause"
+		"reset"
+		"stop";
+	grid-auto-columns: 1fr;
+	grid-auto-rows: 1fr;
 	justify-self: center;
-	background-color: lightgray;
+	/* width: 48px; */
+	/* background-color: lightgray; */
+	/* height: 61px; */
 }
 
 .switch {
 	grid-area: switch;
-	background-color: lightgray;
-	align-self: center;
+	align-self: end;
+	justify-self: center;
+	text-align: center;
 }
 
 .switchButton {
-	width: 50px;
-	height: 50px;
+	width: 48px;
+	height: 17px;
 	background-color: white;
-	border-radius: 10px;
-	box-shadow: 1px 1px 1px 1px black;
+	border-radius: 56px;
+	box-shadow: 6px 4px 20px #5a5a5a;
+}
+
+.backupTimerTitle {
+	color: black;
+}
+
+#waitingTimer {
+	color: #d65345;
+}
+
+.selection {
+	color: red;
+}
+
+.selectionTitle {
+	color:	black;
+}
+
+.icon {
+	width: 30px;
+	height: 30px;
+	box-shadow: 6px 4px 20px #5a5a5a;
+}
+
+
+
+/*BUTTONS*/
+
+.playButton {
+	grid-area: play;
+}
+
+.pauseButton {
+	grid-area: pause;
+}
+
+.resetButton {
+	grid-area: reset;
+}
+
+.stopButton {
+	grid-area: stop;
 }

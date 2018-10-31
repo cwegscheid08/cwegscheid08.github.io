@@ -160,7 +160,7 @@ function isClockLength() {
 }
 
 function changeString() {
-	switchTitle.textContent == "Get Rest Timer" ? (switchTitle.textContent = "Get Work Timer", backupTimerTitle.textContent = "Work Timer") : (switchTitle.textContent = "Get Rest Timer", backupTimerTitle.textContent = "Rest Timer");
+	switchTitle.textContent == "Get Rest Timer" ? (switchTitle.textContent = "Get Work Timer", backupTimerTitle.textContent = "Work Timer: ") : (switchTitle.textContent = "Get Rest Timer", backupTimerTitle.textContent = "Rest Timer: ");
 	runOtherTimer();
 }
 

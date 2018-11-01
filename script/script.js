@@ -65,14 +65,14 @@ function updateDisplay() {
 
 function setWorkTime() {
 	initWork == true ? (firstWork = Object.assign({}, clock), (lastWork = Object.assign({}, firstWork))): ""; 
-	initWork == true ? (initWork = false) : (inputHour[lastWork.hr].selected = true, inputMinute[lastWork.min/5].selected = true, inputSeconds[(lastWork.sec/5)*-1].selected = true);
-	updateDisplay();
+	initWork == true ? (initWork = false) : (inputHour[lastWork.hr].selected = true, inputMinute[lastWork.min/5].selected = true, inputSeconds[firstWork.sec/5].selected = true, inputSeconds[lastWork.sec/5].selected = true);
+// 	updateDisplay();
 }
 
 function setRestTime() {
 	initRest == true ? (firstRest = Object.assign({}, clock), (lastRest = Object.assign({}, firstRest))) : "";
-	initRest == true ? (initRest = false) :  (inputHour[lastRest.hr].selected = true, inputMinute[lastRest.min/5].selected = true, inputSeconds[lastRest.sec/5].selected = true);
-	updateDisplay();
+	initRest == true ? (initRest = false) :  (inputHour[lastRest.hr].selected = true, inputMinute[lastRest.min/5].selected = true, inputSeconds[firstRest.sec/5].selected = true, inputSeconds[lastRest.sec/5].selected = true);
+// 	updateDisplay();
 }
 
 function switchWorkTime () {
@@ -144,7 +144,7 @@ function getTotalSeconds() {
 function switchTimers() {
 	isWork == true ? isWork = false : isWork = true;
 	isWork == true ? setWorkTime() : setRestTime();
-// 	updateDisplay();
+	updateDisplay();
 	displayTimer();
 }
 

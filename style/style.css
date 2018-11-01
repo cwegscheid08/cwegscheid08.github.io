@@ -28,7 +28,7 @@ body {
 		"1 controls 3" 
 		"buttons mainTimer switch" 
 		"7 otherTimer 9";
-	grid-auto-columns: minmax(46px, auto);
+	grid-auto-columns: minmax(auto, auto);
 	grid-auto-rows: auto;
 }
 
@@ -38,17 +38,18 @@ body {
 	justify-self: center;
 	align-self: end;
 	text-align: center;
-	text-shadow: 6px 4px 20px #5a5a5a;
+	text-shadow: 1px 0px 35px #020202;
+	font-size: 24px;
 }
 
 .mainDisplay {
-	color: red;
-	font-size: 126px;
+	color: #ffffff;
+	font-size: 98px;
 	grid-area: mainTimer;
 	align-self: center;
 	justify-self: center;
-	text-shadow: 6px 4px 20px #5a5a5a;
-	border: 1px solid #F44336;
+	text-shadow: 0px 0px 229px #020202;
+	/* border: 1px solid #F44336; */
 	border-radius: 33px;
 }
 
@@ -62,15 +63,8 @@ body {
 	align-self: start;
 	justify-self: start;
 	display: inline-flex;
-	text-shadow: 6px 4px 20px #5a5a5a;
+	text-shadow: 1px 0px 21px #020202;
 }
-
-/* .text {
-	grid-area: instructions;
-	justify-self: center;
-	align-self: center;
-	background-color: lightgray;
-} */
 
 .buttons {
 	grid-area: buttons;
@@ -87,39 +81,66 @@ body {
 
 .switch {
 	grid-area: switch;
-	align-self: start;
+	align-self: center;
 	justify-self: start;
+	font-size: 20px;
 	text-align: center;
 }
 
 .switchButton {
-	width: 48px;
-	height: 17px;
-	background-color: white;
+	width: 20px;
+	height: 37px;
+	background-color: #d0655b;
 	border-radius: 56px;
-	box-shadow: 6px 4px 20px #5a5a5a;
+	box-shadow: 0px 1px 38px 0px #020202;
+	border: 0px;
+}
+
+#hours {
+	color: #cf635a;
+	background-color: white;
+	font-size: 15px;
+	box-shadow: 0px 1px 50px 0px #020202;
+	border: none;
+	opacity: 0.7;
+}
+
+#minutes {
+	color: #dc4637;
+	background-color: white;
+	font-size: 15px;
+	box-shadow: 0px 1px 50px 0px #020202;
+	border: none;
+	opacity: 0.7;
+}
+
+#seconds {
+	color: #dc4637;
+	background-color: white;
+	font-size: 15px;
+	box-shadow: 0px 1px 50px 0px #020202;
+	border: none;
+	opacity: 0.7;
 }
 
 .backupTimerTitle {
-	color: black;
+	color: #3e3e3e;
 }
 
 #waitingTimer {
-	color: #d65345;
+	color: #cf635a;
 }
 
 .selection {
-	color: red;
+	color: #cf635a;
 }
 
 .selectionTitle {
-	color: black;
+	color: #ff1800b3;
 }
 
-.icon {
-	width: 30px;
-	height: 30px;
-	box-shadow: 6px 4px 0px 0px #f2f2f2;
+.switchTitle {
+	color: #000000b8;
 }
 
 /*BUTTONS*/
@@ -137,4 +158,21 @@ body {
 
 .stopButton {
 	grid-area: stop;
+}
+
+.icon {
+	width: 20px;
+	height: 20px;
+	opacity: 0.7;
+}
+
+.button {
+	width: auto;
+	height: auto;
+	margin: 0px 7px 0px 7px;
+	box-shadow: 1px 0px 141px #020202;
+	justify-self: center;
+	padding: 0px 1px 0px 1px;
+	background-color: white;
+	border: white;
 }

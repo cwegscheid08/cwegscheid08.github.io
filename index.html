@@ -5,52 +5,52 @@
         <link rel="stylesheet" type="text/css" href="style/style.css">
         <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
     </head>
-    <body class="container">
-        
-    	<div class="mainDisplay">
-            <h1 id="timerDisplay">00:00:00</h1>
-    	</div>
+    <body>
+        <div class="container">
+        	<div class="mainDisplay">
+                <h1 id="timerDisplay">00:00:00</h1>
+        	</div>
 
-        <div class="backupDisplay">
-            <h5 class="backupTimerTitle">Rest Timer:</h5>
-            <h3 id="waitingTimer">00:00:00</h3>
-        </div>
-        
-		<div id="userInput">
-			<h3 class="selectionTitle">Set Your Timer</h3>
-            <div class="selection">
-    			<span>Hrs: </span>
-    			<select id="hours"></select>
-    			<span>Mins: </span>
-    			<select id="minutes"></select>
-                <span>Secs: </span>
-    			<select id="seconds"></select><br />
+            <div class="backupDisplay">
+                <h5 class="backupTimerTitle">Rest Timer:</h5>
+                <h3 id="waitingTimer">00:00:00</h3>
             </div>
-<!-- 			<h6 class="switchTitle">Get Rest Timer</h6>
-			<input type="button" name="typeSwitch"><br /><br />
-	        <button class="playButton">Play</button>
-	        <button class="pauseButton">Pause</button>
-	        <button class="resetButton">Reset</button>
-	        <button class="stopButton">Stop</button> -->
-        </div>
+            
+    		<div id="userInput">
+    			<h3 class="selectionTitle">Set Your Timer</h3>
+                <div class="selection">
+        			<span>Hrs: </span>
+        			<select id="hours"></select>
+        			<span>Mins: </span>
+        			<select id="minutes"></select>
+                    <span>Secs: </span>
+        			<select id="seconds"></select><br />
+                </div>
+    <!-- 			<h6 class="switchTitle">Get Rest Timer</h6>
+    			<input type="button" name="typeSwitch"><br /><br />
+    	        <button class="playButton">Play</button>
+    	        <button class="pauseButton">Pause</button>
+    	        <button class="resetButton">Reset</button>
+    	        <button class="stopButton">Stop</button> -->
+            </div>
 
-        <div class="buttons">
-<!-- 			<h6 class="switchTitle">Get Rest Timer</h6>
-			<input type="button" name="typeSwitch"><br /><br /> -->
-	        <button class="playButton"><img class="icon" src="./images/play.png"></button><br />
-	        <button class="pauseButton"><img src="./images/pause-512.png" class="icon"></button><br />
-	        <button class="resetButton"><img src="./images/reset-512.png" class="icon"></button><br />
-	        <button class="stopButton"><img src="./images/stop_song_red-512.png" class="icon"></button><br />
+            <div class="buttons">
+    <!-- 			<h6 class="switchTitle">Get Rest Timer</h6>
+    			<input type="button" name="typeSwitch"><br /><br /> -->
+    	        <button class="playButton"><img class="icon" src="./images/play.png"></button>
+    	        <button class="pauseButton"><img src="./images/pause-512.png" class="icon"></button>
+    	        <button class="resetButton"><img src="./images/reset-512.png" class="icon"></button>
+    	        <button class="stopButton"><img src="./images/stop_song_red-512.png" class="icon"></button>
+            </div>
+    		
+    		<div class="switch">
+    			<h6 class="switchTitle">Get Rest Timer</h6>
+    			<input class="switchButton" type="button" name="typeSwitch"><br /><br />
+    		</div>
+            <div class="text">
+    <!--         	<p>The Pomodoro Technique is a time management method developed by Francesco Cirillo in the late 1980s. The technique uses a timer to break down work into intervals, traditionally 25 minutes in length, separated by short breaks. These intervals are named pomodoros, the plural in English of the Italian word pomodoro (tomato), after the tomato-shaped kitchen timer that Cirillo used as a university student.</p> -->
+            </div>
         </div>
-		
-		<div class="switch">
-			<h6 class="switchTitle">Get Rest Timer</h6>
-			<input class="switchButton" type="button" name="typeSwitch"><br /><br />
-		</div>
-        <div class="text">
-<!--         	<p>The Pomodoro Technique is a time management method developed by Francesco Cirillo in the late 1980s. The technique uses a timer to break down work into intervals, traditionally 25 minutes in length, separated by short breaks. These intervals are named pomodoros, the plural in English of the Italian word pomodoro (tomato), after the tomato-shaped kitchen timer that Cirillo used as a university student.</p> -->
-        </div>
-
 
         <script type="text/javascript">
             function getOption(num, hand) {

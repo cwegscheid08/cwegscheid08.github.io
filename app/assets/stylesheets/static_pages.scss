@@ -1,0 +1,154 @@
+// Place all the styles related to the static_pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.container {
+	width: auto;
+	height: 100%;
+	display: grid;
+	grid-template-areas:
+		"logo logo menu"
+		"content content content"
+		"footer footer footer";
+	grid-auto-rows: 1fr;
+	grid-auto-columns: 1fr;
+}
+
+#background_video {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	min-width: 100%;
+	min-height: 100%;
+}
+
+.logo {
+	grid-area: logo;
+	margin: 40px 0px 0px 60px;
+	position: fixed;
+	background-color: rgba(84, 85, 82, 0);
+	border-radius: 5px;
+	height: 90px;
+	a img {
+		margin: -25px 0px 0px 11px;
+	}
+}
+
+.filter {
+	background-color: rgb(10, 32, 68);
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	min-width: 100%;
+	min-height: 100%;
+	opacity: 0.2;
+}
+
+.footer {
+	grid-area: footer;
+	position: fixed;
+	color: white;
+	margin: 514px 0px 0px 71px;
+	width: 311px;
+	height: 54px;
+	font-size: 30px;
+	font-weight: 100;
+	p {
+		margin: 8px 0px 0px 33px;
+		animation-delay: 2s;
+		animation-duration: 2s;
+	}
+}
+
+
+/* CONTACT PAGE */
+
+.contact_info {
+	grid-area: content;
+	position: relative;
+	color: white;
+	justify-self: center;
+	text-align: center;
+	margin: 58px 0px 0px 0px;
+	font-size: 26px;
+	font-weight: 100;
+	background-color: rgba(0, 0, 0, 0.4);
+	border-radius: 4px;
+	animation-delay: 2s;
+	animation-duration: 3s;
+	ul li {
+		list-style: none;
+	}
+	ul {
+		margin-left: -33px;
+	}
+}
+
+
+
+/* DROP DOWN MENU */
+
+
+.dropbtn {
+  background-color: rgba(0, 0, 255, 0);
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  grid-area: menu;
+  position: relative;
+  display: inline-block;
+  margin: 48px 0px 0px 209px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: rgba(255,255,255,0.11);
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  color: white;
+}
+
+.dropdown-content a:hover {
+	background-color: rgba(0, 0, 0, 0.35);
+	color: white;
+}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: rgba(255, 255, 255, 0.25)}
+
+.menu_icon {
+	div {
+  		width: 35px;
+  		height: 5px;
+  		background-color: rgba(255, 255, 255, 1);
+  		margin: 6px 0;
+  		border-radius: 3px;
+	}
+	.one {
+		animation-delay: 0.5s;
+		animation-duration: 3s;
+	}
+	.two {
+		animation-delay: 1s;
+		animation-duration: 3s;
+	}
+	.three {
+		animation-delay: 1.5s;
+		animation-duration: 3s;
+	}
+}
+

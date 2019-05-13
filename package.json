@@ -1,0 +1,7 @@
+{
+  "name": "wegscheid_web_services",
+  "private": true,
+  "dependencies": {
+    "animate.css": "^3.7.0"
+  }
+}
